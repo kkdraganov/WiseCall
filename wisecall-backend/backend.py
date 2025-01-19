@@ -17,7 +17,7 @@ import whisper
 # ------------------------------------------------------------------------------
 # AI constants
 # ------------------------------------------------------------------------------
-TRAIN = True
+TRAIN = False
 MODEL_DATA = "extended_data.csv"
 MODEL_PATH = "model.pkl"
 
