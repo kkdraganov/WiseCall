@@ -1,4 +1,4 @@
-from backend import transcribe_audio
+# from backend import transcribe_audio
 
 import pandas as pd
 import numpy as np
