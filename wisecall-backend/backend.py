@@ -17,7 +17,7 @@ import whisper
 # ------------------------------------------------------------------------------
 # AI constants
 # ------------------------------------------------------------------------------
-TRAIN = False
+TRAIN = os.getenv("TRAIN")
 MODEL_DATA = "extended_data.csv"
 MODEL_PATH = "model.json"
 
