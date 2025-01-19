@@ -59,7 +59,7 @@ class SpamDetectionPipeline:
     def load_model(cls, filepath):
         """Load a trained model"""
         instance = cls()
-        instance.pipeline = joblib.load(filepath)
+        instance.pipeline = joblib.load(filepath, mmap_mode='r')
         return instance
 
 def label_numeric(label_text):
@@ -138,7 +138,7 @@ def train_model(data_path):
     # Train model
     pipeline = SpamDetectionPipeline()
     pipeline.fit(X_train_features, y_train)
-    pipeline.save_model('model')
+    pipeline.save_model('model.pkl')
 
     evaluate_model(pipeline, X_test_features, y_test)
 

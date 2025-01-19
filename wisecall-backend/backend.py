@@ -17,9 +17,9 @@ import whisper
 # ------------------------------------------------------------------------------
 # AI constants
 # ------------------------------------------------------------------------------
-TRAIN = False
+TRAIN = True
 MODEL_DATA = "extended_data.csv"
-MODEL_PATH = "model"
+MODEL_PATH = "model.pkl"
 
 AUDIO_MODEL = "base"
 
@@ -38,7 +38,7 @@ twilio_client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
 # ------------------------------------------------------------------------------
 # FastAPI App
 # ------------------------------------------------------------------------------
-app = FastAPI(title="Spam Detection + Twilio Conference Demo")
+app = FastAPI(title="Spam Detection")
 
 
 # ------------------------------------------------------------------------------
