@@ -18,6 +18,9 @@ whisper = "*"
 textblob = "*"
 twilio = "^9.4.3"
 joblib = "^1.4.2"
+json = "*"
+base64 = "*"
+io = "*"
 
 [build-system]
 requires = ["poetry-core"]

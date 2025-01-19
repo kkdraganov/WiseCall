@@ -1,5 +1,9 @@
 # from backend import transcribe_audio
 
+import base64
+import io
+import json
+import joblib
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -10,8 +14,6 @@ from sklearn.pipeline import Pipeline
 from sklearn.ensemble import RandomForestRegressor, VotingRegressor
 
 from xgboost import XGBRegressor
-
-import joblib
 
 
 class SpamDetectionPipeline:
@@ -52,14 +54,37 @@ class SpamDetectionPipeline:
         return np.clip(self.pipeline.predict(combined_features)[0], 0, 1)
     
     def save_model(self, filepath):
-        """Save the trained model"""
-        joblib.dump(self.pipeline, filepath)
-    
+        """Save the trained model as JSON with base64 encoding."""
+        
+        # Serialize the pipeline using joblib to a byte stream
+        buffer = io.BytesIO()
+        joblib.dump(self.pipeline, buffer)
+        buffer.seek(0)
+        
+        # Convert binary data to a base64-encoded string
+        pipeline_base64 = base64.b64encode(buffer.read()).decode('utf-8')
+        
+        # Save the serialized model as JSON
+        with open(filepath, 'w') as f:
+            json.dump({"pipeline": pipeline_base64}, f)
+
     @classmethod
     def load_model(cls, filepath):
-        """Load a trained model"""
+        """Load a trained model from a JSON file with base64 decoding."""
+        
         instance = cls()
-        instance.pipeline = joblib.load(filepath, mmap_mode='r')
+        
+        # Load JSON file
+        with open(filepath, 'r') as f:
+            model_data = json.load(f)
+        
+        # Decode the base64 string back to binary
+        pipeline_bytes = base64.b64decode(model_data["pipeline"])
+        
+        # Restore the model from byte stream
+        buffer = io.BytesIO(pipeline_bytes)
+        instance.pipeline = joblib.load(buffer)
+        
         return instance
 
 def label_numeric(label_text):
@@ -117,7 +142,7 @@ def prepare_features(X, tfidf_vectorizer=None):
     additional_features = pd.DataFrame([extract_additional_features(text) for text in X])
     return np.hstack((tfidf_features.toarray(), additional_features)), tfidf_vectorizer
 
-def train_model(data_path):
+def train_model(data_path, save_path):
     df = pd.read_csv(data_path)
 
     # Split data
@@ -138,7 +163,7 @@ def train_model(data_path):
     # Train model
     pipeline = SpamDetectionPipeline()
     pipeline.fit(X_train_features, y_train)
-    pipeline.save_model('model.pkl')
+    pipeline.save_model(save_path)
 
     evaluate_model(pipeline, X_test_features, y_test)
 

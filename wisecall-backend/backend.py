@@ -17,9 +17,9 @@ import whisper
 # ------------------------------------------------------------------------------
 # AI constants
 # ------------------------------------------------------------------------------
-TRAIN = False
+TRAIN = True
 MODEL_DATA = "extended_data.csv"
-MODEL_PATH = "model.pkl"
+MODEL_PATH = "model.json"
 
 AUDIO_MODEL = "base"
 
@@ -45,7 +45,7 @@ app = FastAPI(title="Spam Detection")
 # Spam Detection Model
 # ------------------------------------------------------------------------------
 if TRAIN:
-    train_model(MODEL_DATA)
+    train_model(MODEL_DATA, MODEL_PATH)
 
 spam_pipeline = SpamDetectionPipeline.load_model(MODEL_PATH)
 tfidf_vectorizer = joblib.load('tfidf_vectorizer.pkl')
