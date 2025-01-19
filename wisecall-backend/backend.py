@@ -47,7 +47,7 @@ app = FastAPI(title="Spam Detection + Twilio Conference Demo")
 if TRAIN:
     train_model(MODEL_DATA)
 
-spam_pipeline = SpamDetectionPipeline.load_model('model')
+spam_pipeline = SpamDetectionPipeline.load_model(MODEL_PATH)
 tfidf_vectorizer = joblib.load('tfidf_vectorizer.pkl')
 
 
