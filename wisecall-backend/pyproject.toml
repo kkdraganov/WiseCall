@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "WiseCall"
+version = "0.1.0"
+description = "FastAPI-based scam call detection system"
+authors = ["Kaloyan Draganov <kaloyan@draganov.com>", "Shariq Rifai <shariqrifai.p@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "^0.79.0"
+uvicorn = "^0.18.3"
+numpy = "*"
+pandas = "*"
+matplotlib = "*"
+scikit-learn = "*"
+xgboost = "*"
+pydub = "*"
+whisper = "*"
+textblob = "*"
+twilio = "*"
+joblib = "*"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
