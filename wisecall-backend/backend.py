@@ -166,6 +166,10 @@ async def handle_recording_complete(request: Request):
         "spam_likelihood": spam_likelihood
     })
 
+@app.get("/")
+async def home():
+    return {"message": "Welcome to WiseCall"}
+
 # ------------------------------------------------------------------------------
 # 6. Example: Start the Server (if running locally)
 # ------------------------------------------------------------------------------
