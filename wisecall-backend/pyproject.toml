@@ -7,7 +7,7 @@ authors = ["Kaloyan Draganov <kaloyan@draganov.com>", "Shariq Rifai <shariqrifai
 [tool.poetry.dependencies]
 python = "^3.9"
 fastapi = "^0.79.0"
-hypercorn = "^0.14.3"
+daphne = "^4.0.0"
 numpy = "*"
 pandas = "*"
 matplotlib = "*"
