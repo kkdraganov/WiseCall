@@ -167,11 +167,11 @@ def evaluate_model(pipeline, X_test, y_test):
 # train_model('extended_data.csv')
 
 # Load the model and vectorizer for prediction
-model = SpamDetectionPipeline.load_model('model')
-tfidf_vectorizer = joblib.load('tfidf_vectorizer.pkl')
+# model = SpamDetectionPipeline.load_model('model')
+# tfidf_vectorizer = joblib.load('tfidf_vectorizer.pkl')
 
 # Example: Transcribe and predict from an audio file
-file_path = 'New_Recording_15.mov'
-transcription = transcribe_audio(file_path)
-print(f"Transcription: {transcription}")
-print(f"Spam Likelihood: {model.predict(transcription, tfidf_vectorizer):.2%}")
+# file_path = 'New_Recording_15.mov'
+# transcription = transcribe_audio(file_path)
+# print(f"Transcription: {transcription}")
+# print(f"Spam Likelihood: {model.predict(transcription, tfidf_vectorizer):.2%}")
